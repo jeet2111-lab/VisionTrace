@@ -1,0 +1,7 @@
+backend/venv/
+backend/__pycache__/
+node_modules/
+.env
+temp_repo/
+*.mp4
+*.pt

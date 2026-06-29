@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VisionTrace | Command Center</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="app">
+      <!-- Sidebar / Header -->
+      <header class="header">
+        <div class="logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+          <h1>VisionTrace</h1>
+        </div>
+        <div class="status">
+          <span class="pulse"></span> System Active
+        </div>
+      </header>
+
+      <!-- Main Dashboard Grid -->
+      <main class="dashboard">
+        <section class="video-section panel">
+          <div class="panel-header">
+            <h2>Live Feed - Camera CAM-01 (Highway 5)</h2>
+            <div>
+              <button id="btnEditLanes" class="btn-config">⚙️ Config Lanes</button>
+              <div class="badge" id="fpsCounter" style="margin-right: 0.5rem; background-color: rgba(255,255,255,0.1); color: #fff; display: inline-block;">FPS: --</div>
+              <div class="badge connection-status" id="connStatus" style="display: inline-block;">Connecting...</div>
+            </div>
+          </div>
+          <div class="video-container">
+            <canvas id="videoCanvas" width="640" height="360"></canvas>
+            
+            <!-- Drawing Tool UI -->
+            <div id="drawingTools" class="drawing-tools hidden">
+              <div class="drawing-header">Zone Configurator</div>
+              <p id="drawingInstructions">Click 4 points to map the <strong>Left Lane</strong>.</p>
+              <div class="drawing-actions">
+                <button id="btnResetDrawing" class="btn-action">Reset</button>
+                <button id="btnSaveDrawing" class="btn-action primary hidden">Save Config</button>
+              </div>
+            </div>
+
+            <div id="alertBanner" class="alert-banner hidden">
+              <span class="icon">⚠️</span>
+              <span id="alertMessage">Anomaly Detected!</span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="sidebar-right panel">
+          <div class="panel-header">
+            <h2>Traffic Density</h2>
+          </div>
+          <div class="density-container">
+            <div class="lane-card">
+              <h3>Left Lane</h3>
+              <div class="density-stats">
+                <div class="stat-value" id="countLeft">0</div>
+                <div class="stat-badge" id="intensityLeft">Smooth</div>
+              </div>
+            </div>
+            <div class="lane-card">
+              <h3>Right Lane</h3>
+              <div class="density-stats">
+                <div class="stat-value" id="countRight">0</div>
+                <div class="stat-badge" id="intensityRight">Smooth</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="panel-header" style="border-top: 1px solid var(--border-color);">
+            <h2>Incident Logs</h2>
+          </div>
+          <div class="logs-container" id="logsContainer">
+            <!-- Logs will be populated here -->
+          </div>
+        </aside>
+
+        <section class="analytics-section panel">
+          <div class="panel-header">
+            <h2>Live Vehicle Tracking</h2>
+          </div>
+          <table class="tracking-table">
+            <thead>
+              <tr>
+                <th>Tracking ID</th>
+                <th>Status</th>
+                <th>Last Update</th>
+              </tr>
+            </thead>
+            <tbody id="trackingBody">
+              <!-- Tracking rows -->
+            </tbody>
+          </table>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
